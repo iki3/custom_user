@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from . import forms
-from .models import InfoModelForm
+
 
 
 # Create your views here.
