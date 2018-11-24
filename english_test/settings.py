@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'app.apps.App1Config',
+    'django.contrib.app',
 ]
 
 MIDDLEWARE = [
@@ -83,12 +85,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+
 
 
 # Password validation
@@ -127,6 +124,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# カスタムユーザーを使う
+AUTH_USER_MODEL = 'app.User'
+
+# ログインページと、直接ログインページへ行った後のリダイレクトページ
+LOGIN_URL = 'app:login'
+LOGIN_REDIRECT_URL = 'app:top'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='ryuseisoccer2@gmail.com'
+EMAIL_HOST_PASSWORD='yxeadjtvhwdoevbu'
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 DEBUG = False
 
