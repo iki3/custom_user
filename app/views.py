@@ -66,32 +66,19 @@ class UserCreate(generic.CreateView):
             'token': dumps(user.pk),
             'user': user,
         }
-
         subject_template = get_template('app_templates/mail_template/create/subject.txt')
         subject = subject_template.render(context)
 
         message_template = get_template('app_templates/mail_template/create/message.txt')
         message = message_template.render(context)
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = [
-            "yojironoda1@gamil.com"
-        ]
-        '''
-  #      def mail3(request):
-          #  subject = "題名"
-         #   message = "本文\\nです"
-        
-        '''
-       
+        recipient_list = [user.username]
         send_mail(subject, message, from_email, recipient_list)
-        '''
-        send_mail('Subject here','Here is the message.','ryuseisoccer2@gmail.com',['yojironoda1@gmail.com'],fail_silently=False,)
-        #user.email_user(subject, message)
-        '''
-
-
-
         return redirect('app:user_create_done')
+        
+        
+        
+
 
 def mailmail(request):
     subject = 'Thank you for registering to our site'
