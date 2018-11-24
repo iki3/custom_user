@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 #    'app',
-    'app.apps.App1Config',
+    'app.apps.AppConfig',
 #    'django.contrib.app',
 ]
 
@@ -143,7 +143,7 @@ EMAIL_HOST_PASSWORD='yxeadjtvhwdoevbu'
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-"""
+
 DEBUG = False
 
 try:
@@ -154,4 +154,3 @@ except ImportError:
 if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
-    """
