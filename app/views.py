@@ -41,7 +41,8 @@ class Login(LoginView):
 class Logout(LoginRequiredMixin, LogoutView):
     """ログアウトページ"""
     template_name = 'app_templates/top.html'
-
+def map(request):
+    return render(request, 'app_templates/map.html')
 
 class UserCreate(generic.CreateView):
     """ユーザー仮登録"""
