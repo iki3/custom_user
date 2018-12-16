@@ -14,11 +14,12 @@ from django.urls import reverse_lazy
 from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, MyPasswordChangeForm,
-    MyPasswordResetForm, MySetPasswordForm
+    MyPasswordResetForm, MySetPasswordForm,searchForm
 )
 
 from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render
+from .models import InfoModelForm
 
 
 
@@ -43,7 +44,40 @@ class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'app_templates/top.html'
 def map(request):
     return render(request, 'app_templates/map.html')
+    
+def info(request):
+    infodata = InfoModelForm.objects.all()
+    infodata2 = InfoModelForm.objects.values()
+    my_dict2 = {
+        'title':'テスト',
+        'val':infodata,
+        'val2':infodata2,
+    }
+    return render(request, 'app_templates/info.html',my_dict2)
 
+def create(request):
+   
+    if (request.method == 'POST'):
+        info1data=InfoModelForm.objects.filter(id=request.POST[kensaku_id])
+        my_dict2 = {
+            'title':'テスト',
+            'val':info1data,
+        
+        }
+        return render(request,'app_templates/info.html',my_dict2)
+        
+    modelform_dict = {
+        'title':'検索てっすト',
+        'form':searchForm(),
+    }
+    return render(request, 'app_templates/create.html',modelform_dict)
+    
+    
+    
+    
+
+    
+    
 class UserCreate(generic.CreateView):
     """ユーザー仮登録"""
     template_name = 'app_templates/user_create.html'

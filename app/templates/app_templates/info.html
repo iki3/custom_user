@@ -1,0 +1,29 @@
+{% extends "app_templates/base.html" %}
+{% block content %}
+<h1>{{title}}</h1>
+    <p>{{val}}</p>
+
+    <table>
+      <tr>
+        <th>.objects.all()の表示</th>
+      </tr>
+    {% for i in val %}
+    <tr>
+      <th>{{i}}</th>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p>{{val2}}</p>
+
+  <table>
+    <tr>
+      <th>.objects.values()の表示</th>
+    </tr>
+  {% for i2 in val2 %}
+  <tr>
+    <th>{{i2}}</th>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

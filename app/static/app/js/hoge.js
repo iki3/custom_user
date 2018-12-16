@@ -23,6 +23,10 @@
 //    new google.maps.Point(0,0),
 //    new google.maps.Point(19,51)
 //  );
+      var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+      });
       // マーカーを設置
       var marker = new google.maps.Marker({
         position: lat_lng,

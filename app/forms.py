@@ -40,9 +40,9 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('email', 'first_name', 'last_name')
+            fields = ('email', 'first_name', 'last_name','example1')
         else:
-            fields = ('username', 'email', 'first_name', 'last_name')
+            fields = ('username', 'email', 'first_name', 'last_name','example1')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -75,3 +75,15 @@ class MySetPasswordForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+
+
+
+
+class searchForm(forms.Form):
+    kensaku = forms.IntegerField(
+        label='kensaku_id',
+     #   max_length=20,
+        required=True,
+        widget=forms.TextInput()
+    )

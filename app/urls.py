@@ -22,5 +22,9 @@ urlpatterns = [
     path('password_reset/confirm/<uidb64>/<token>/', views.PasswordResetConfirm.as_view(), name='password_reset_confirm'),
     path('password_reset/complete/', views.PasswordResetComplete.as_view(), name='password_reset_complete'),
     path('map/', views.map, name='map'),
+    path('info/', views.info, name='info'),
+#    path('info1/', views.info1, name='info1'),
+    path('create/', views.create, name='create'),
+
 
 ]
