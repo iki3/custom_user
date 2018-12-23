@@ -50,7 +50,9 @@ if settings.AUTH_USER_MODEL == 'app.User':
         email = models.EmailField(_('email address'), unique=True)
         first_name = models.CharField(_('first name'), max_length=30, blank=True)
         last_name = models.CharField(_('last name'), max_length=150, blank=True)
-        example1=models.CharField(_('example'),max_length=150,blank=True)
+        example1=models.CharField(_('example1'),max_length=150,blank=True)
+        example2=models.CharField(_('example2'),max_length=150,blank=True)
+        example3=models.CharField(_('example3'),max_length=150,blank=True)
 
         is_staff = models.BooleanField(
             _('staff status'),

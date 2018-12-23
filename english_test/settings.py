@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'english_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'eng_db',
-        'USER': 'eng',
-        'PASSWORD': 'eng0903',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -138,8 +138,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER='ryuseisoccer2@gmail.com'
-EMAIL_HOST_PASSWORD='dsfuljewgxwqubfx'
+EMAIL_HOST_USER=''
+EMAIL_HOST_PASSWORD=''
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

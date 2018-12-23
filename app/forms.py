@@ -40,14 +40,15 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('email', 'first_name', 'last_name','example1')
+            fields = ('email', 'first_name', 'last_name','example1','example2','example3')
         else:
-            fields = ('username', 'email', 'first_name', 'last_name','example1')
+            fields = ('username', 'email', 'first_name', 'last_name','example1','example2','example3')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+            #field.widget.attrs['placeholder'] = span  # placeholderにフィールドのラベルを入れる
 
 
 class MyPasswordChangeForm(PasswordChangeForm):

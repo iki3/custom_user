@@ -1,5 +1,10 @@
 {% extends "app_templates/base.html" %}
 {% block content %}
+<ul>
+    <li>lat: <span id="lat"></span></li>
+    <li>lng: <span id="lng"></span></li>
+  </ul>
+<div id="map"></div>
 <form action="" method="POST">
     {{ form.non_field_errors }}
     <table class="table">
@@ -7,7 +12,7 @@
             {% for field in form %}
                 <tr>
                     <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                    <td>{{ field }} {{ field.errors }}</td>
+                    <td>{{ field  }} {{ field.errors }} </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -15,4 +20,9 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-success btn-lg" >送信</button>
 </form>
+  {% load static %}
+
+  <script src="{% static 'app/js/hoge.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGDQUmUwxTKDYbrOXlzLasHgeBfuPkVoA&callback=initMap" async defer></script>
+
 {% endblock %}

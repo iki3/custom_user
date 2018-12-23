@@ -1,4 +1,7 @@
 {% extends "app_templates/base.html" %}
 {% block content %}
 <p>ここに、好きな内容を入れる。</p>
+{% if user.is_authenticated %}
+<a class="nav-item nav-link" href="{% url 'app:map'%}">map</a>
+{% endif %}
 {% endblock %}
