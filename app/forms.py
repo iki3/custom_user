@@ -4,6 +4,8 @@ from django.contrib.auth.forms import (
     PasswordResetForm, SetPasswordForm
 )
 from django.contrib.auth import get_user_model
+from .models import InfoModelForm
+
 
 User = get_user_model()
 
@@ -88,3 +90,9 @@ class searchForm(forms.Form):
         required=True,
         widget=forms.TextInput()
     )
+
+
+class InfoModelFormAdd(forms.ModelForm):
+    class Meta:
+        model = InfoModelForm
+        fields = ['name','mail','gender','department','year','created_at']

@@ -20,7 +20,7 @@ from .forms import (
 from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render
 from .models import InfoModelForm
-
+from .forms import InfoModelFormAdd
 
 
 
@@ -47,28 +47,25 @@ def map(request):
     
 def info(request):
     infodata = InfoModelForm.objects.all()
-    infodata2 = InfoModelForm.objects.values()
+    header = ['ID','名前','メール','性別','部署','社歴','作成日']
     my_dict2 = {
         'title':'テスト',
         'val':infodata,
-        'val2':infodata2,
+        'header':header
     }
     return render(request, 'app_templates/info.html',my_dict2)
 
 def create(request):
    
+
     if (request.method == 'POST'):
-        info1data=InfoModelForm.objects.filter(id=request.POST[kensaku_id])
-        my_dict2 = {
-            'title':'テスト',
-            'val':info1data,
-        
-        }
-        return render(request,'app_templates/info.html',my_dict2)
-        
+        obj = InfoModelForm()
+        info = InfoModelFormAdd(request.POST,instance=obj)
+        info.save()
+        return redirect(to='/info')
     modelform_dict = {
-        'title':'検索てっすト',
-        'form':searchForm(),
+        'title':'modelformテスト',
+        'form':InfoModelFormAdd(),
     }
     return render(request, 'app_templates/create.html',modelform_dict)
     
