@@ -1,28 +1,60 @@
 {% extends "app_templates/base.html" %}
 {% block content %}
 <ul>
-    <li>lat: <span id="lat"></span></li>
-    <li>lng: <span id="lng"></span></li>
+
+  
   </ul>
 <div id="map"></div>
 <form action="" method="POST">
     {{ form.non_field_errors }}
     <table class="table">
-        <tbody>
+                <tbody>
             {% for field in form %}
+
                 <tr>
                     <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
                     <td>{{ field  }} {{ field.errors }} </td>
                 </tr>
             {% endfor %}
+                            <tr>
+                                <script>
+                                alert(response.your_surprise_txt);
+                                </script>
+                    <th><li>lat:lng </li></th>
+                    <td><span id="lat"></span>:<span id="lng"></span></td>
+                </tr>
         </tbody>
+
     </table>
     {% csrf_token %}
     <button type="submit" class="btn btn-success btn-lg" >送信</button>
 </form>
   {% load static %}
 
-  <script src="{% static 'app/js/hoge.js' %}"></script>
+  <script src="{% static 'app/js/app1.js' %}"></script>
+  <script src="{% static 'app/json/hoge.json' %}"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGDQUmUwxTKDYbrOXlzLasHgeBfuPkVoA&callback=initMap" async defer></script>
 
+
+
 {% endblock %}
+
+
+{% if param.status == 1 %}
+    <!-- 特定の条件の場合activeというクラス名をつける -->
+    <li class="active">
+{% else %}
+    <li>
+{% endif %}
+
+        <a href="#">Active</a>
+    </li>
+……
+
+{% for value in values %}
+    {% if forloop.last %}
+         <p>This is last time. {{ value }}</p>
+    {% else %}
+         <p>{{ value }}</p>
+    {% endif %}
+{% endfor %}

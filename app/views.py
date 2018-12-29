@@ -22,8 +22,17 @@ from django.shortcuts import render
 from .models import InfoModelForm
 from .forms import InfoModelFormAdd
 
+from django.http.response import JsonResponse
+import os
+module_dir = os.path.dirname(__file__) # views.pyのあるディレクトリを取得
+json_path = os.path.join(module_dir, 'hoge.json')
+from django.http import HttpResponse,Http404
 
+import json
+import logging
+import re
 
+#from app/json import hoge.js
 
 
 User = get_user_model()
@@ -53,6 +62,12 @@ def info(request):
         'val':infodata,
         'header':header
     }
+    f = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'r')
+    json_dict = json.load(f)
+    print(json_dict['lat'])
+    
+ 
+
     return render(request, 'app_templates/info.html',my_dict2)
 
 def create(request):
@@ -69,11 +84,126 @@ def create(request):
     }
     return render(request, 'app_templates/create.html',modelform_dict)
     
+def ajax(request):
+    logger = logging.getLogger('development')
+    print('Hello World!')
+    return render(request,'app_templates/surprise.html')
     
     
     
+    
+    
+def for_ajax(request):    # AJAXに答える関数
 
+
+    if request.method == 'POST':
+        txt = request.POST['your_txt']  # POSTデータを取得して
+        surprise_txt = txt + "!!!"  # 加工
+        print("こんにちは")
+        print (txt)
+        response = json.dumps({'your_surprise_txt':surprise_txt,})  # JSON形式に直して・・
+
+        return HttpResponse(response,content_type='application/json')  # 返す。JSONはjavascript扱いなのか・・
+
+    else:
+        print("こんばんわ")
+        raise Http404  # GETリクエストを404扱いにしているが、実際は別にしなくてもいいかも   
+
+def map1(request):
+    logger = logging.getLogger('development')
+    print('Hello World!')
+    return render(request,'app_templates/map1.html')
     
+def map2(request):    # AJAXに答える関数
+
+
+    if request.method == 'POST':
+        txt = request.POST['lat'] # POSTデータを取得して
+        txt2=request.POST['lng']
+     #   print('book1の情報：{}'.format(txt['lat']))
+     #  print('book1の情報：{}'.format(txt['lng']))
+     #   surprise_txt = format(txt['lat'])+ "!!!"  # 加工
+        print("こんにちは")
+        print (txt)
+        print (txt2)
+        print(type(txt))
+        surprise_txt = txt + "!!!" 
+  #      moji=txt.rsplit('}')[0]
+   #     moji = txt.split('{')[0]
+        my_dict2 = {
+           'lat':txt,
+           'lng':txt2,
+        }
+     #   print(moji)
+     #   response = txt # JSON形式に直して・・
+        response = json.dumps({'your_surprise_txt':surprise_txt,})
+        
+        f2 = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'w')
+        json.dump(my_dict2, f2)
+        f = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'r')
+   #     json_dict = json.load(f)
+#        txt3=f['lat']
+  #      print (json_dict)
+        
+        return HttpResponse(response,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
+
+    else:
+        print("こんばんわ")
+        raise Http404  # GETリクエストを404扱いにしているが、実際は別にしなくてもいいかも   
+
+
+def save_latlng(request):    # AJAXに答える関数
+
+
+    if request.method == 'POST':
+        txt = request.POST['lat'] # POSTデータを取得して
+        txt2=request.POST['lng']
+     #   print('book1の情報：{}'.format(txt['lat']))
+     #  print('book1の情報：{}'.format(txt['lng']))
+     #   surprise_txt = format(txt['lat'])+ "!!!"  # 加工
+        print("こんにちは")
+        print (txt)
+        print (txt2)
+        print(type(txt))
+        surprise_txt = txt + "!!!" 
+  #      moji=txt.rsplit('}')[0]
+   #     moji = txt.split('{')[0]
+        my_dict2 = {
+           'lat':txt,
+           'lng':txt2,
+        }
+     #   print(moji)
+     #   response = txt # JSON形式に直して・・
+        response = json.dumps({'your_surprise_txt':surprise_txt,})
+        
+    #    f2 = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'w')
+    #    json.dump(my_dict2, f2)
+    #    f = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'r')
+   #     json_dict = json.load(f)
+#        txt3=f['lat']
+  #      print (json_dict)
+        U=Userq.objects.get(pk=2)
+        U.example3=txt+":"+txt2
+        U.save()
+        return HttpResponse(response,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
+
+    else:
+        print("こんばんわ")
+        raise Http404  # GETリクエストを404扱いにしているが、実際は別にしなくてもいいかも   
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
     
 class UserCreate(generic.CreateView):
     """ユーザー仮登録"""

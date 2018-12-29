@@ -25,6 +25,11 @@ urlpatterns = [
     path('info/', views.info, name='info'),
 #    path('info1/', views.info1, name='info1'),
     path('create/', views.create, name='create'),
-
-
+   
+    path('surprise/', views.ajax, name='ajax'),
+    path('for_ajax/', views.for_ajax, name='for_ajax'),
+    path('map1/', views.map1, name='map1'),
+    path('map2/', views.map2, name='map2'),
+    path('save_latlng/', views.save_latlng, name='save_latlng'),
+    
 ]

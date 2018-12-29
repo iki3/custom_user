@@ -12,7 +12,7 @@
     <title>会員登録サンプル</title>
       {% load static %}
 
-  <script src="{% static 'app/js/hoge.js' %}"></script>
+
 
   <style>
     html, body {
@@ -68,6 +68,46 @@
         {% block content %}{% endblock %}
     </div>
 
+    {% csrf_token %}
+</body>
+<script>
+    function getClickLatLng(lat_lng, map) {
+//alert(JSON.stringify(obj));
+      // 座標を表示
+      document.getElementById('lat').textContent = lat_lng.lat();
+      document.getElementById('lng').textContent = lat_lng.lng();
+      var obj={
+          lat:lat_lng.lat(),
+          lng:lat_lng.lng(),
+      };
+      iti=lat_lng.lat()+","+lat_lng.lng();
+ //     alert(obj.lat);
+        $.ajax({
+            'url':'{% url "app:save_latlng" %}',
+            'type':'POST',
+            'data':{
+                'lat':lat_lng.lat(),
+                'lng':lat_lng.lng(),
+            },
+            'dataType':'json',
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            'success':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+               // alert(response.your_surprise_txt);  // レスポンスからデータを取り出してアラート
+            },
+          'error':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+                alert("st");  // レスポンスからデータを取り出してアラート
+            },
+        });
+       
+  var icon = new google.maps.MarkerImage('president_furukawa.jpg',
+    new google.maps.Size(200,200),
+    new google.maps.Point(0,0),
+    new google.maps.Point(19,51)
+  );
+}
+</script>
+
+  {% load static %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -81,6 +121,7 @@
             crossorigin="anonymous"></script>
             
               <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGDQUmUwxTKDYbrOXlzLasHgeBfuPkVoA&callback=initMap" async defer></script>
-
-</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://raw.githubusercontent.com/juniskw/django_tools/master/csrf_token_ajax.js"></script>
 </html>

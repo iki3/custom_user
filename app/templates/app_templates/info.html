@@ -7,7 +7,7 @@
       <tr>
         <th>.objects.all()の表示</th>
       </tr>
-    {% for i in val %}
+    {% for i in hoge %}
     <tr>
       <th>{{i}}</th>
     </tr>
@@ -20,10 +20,15 @@
     <tr>
       <th>.objects.values()の表示</th>
     </tr>
-  {% for i2 in val2 %}
+  {% for i2 in hoge %}
   <tr>
     <th>{{i2}}</th>
   </tr>
   {% endfor %}
 </table>
+  {% load static %}
+
+  <script src="{% static 'app/js/hoge.js' %}"></script>
+  <script src="{% static 'app/json/hoge.json' %}"></script>
+
 {% endblock %}
