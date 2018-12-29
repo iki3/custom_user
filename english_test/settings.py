@@ -144,7 +144,7 @@ EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-DEBUG = False
+DEBUG = True
 
 try:
     from .local_settings import *
