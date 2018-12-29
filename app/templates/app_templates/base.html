@@ -72,6 +72,7 @@
 </body>
 <script>
     function getClickLatLng(lat_lng, map) {
+      event.preventDefault();
 //alert(JSON.stringify(obj));
       // 座標を表示
       document.getElementById('lat').textContent = lat_lng.lat();
