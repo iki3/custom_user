@@ -124,6 +124,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [                  # <-- ここから
+    os.path.join(BASE_DIR, 'static'),
+]  
+
 # カスタムユーザーを使う
 AUTH_USER_MODEL = 'app.User'
 
@@ -142,5 +147,4 @@ EMAIL_HOST_USER='ryuseisoccer2@gmail.com'
 EMAIL_HOST_PASSWORD='dsfuljewgxwqubfx'
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 
