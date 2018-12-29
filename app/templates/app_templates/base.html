@@ -91,7 +91,7 @@
             },
             'dataType':'json',
             
-            csrfmiddlewaretoken: '{{ csrf_token }}',
+          
             'success':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
                 alert(response.your_surprise_txt);  // レスポンスからデータを取り出してアラート
                 alert(iti);
