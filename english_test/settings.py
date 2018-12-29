@@ -144,3 +144,13 @@ EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())

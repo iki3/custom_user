@@ -161,10 +161,9 @@ def save_latlng(request):    # AJAXに答える関数
      #   print('book1の情報：{}'.format(txt['lat']))
      #  print('book1の情報：{}'.format(txt['lng']))
      #   surprise_txt = format(txt['lat'])+ "!!!"  # 加工
-        print("こんにちは")
-        print (txt)
-        print (txt2)
-        print(type(txt))
+    #   print (txt)
+     #   print (txt2)
+     #   print(type(txt))
         surprise_txt = txt + "!!!" 
   #      moji=txt.rsplit('}')[0]
    #     moji = txt.split('{')[0]
