@@ -181,9 +181,9 @@ def save_latlng(request):    # AJAXに答える関数
    #     json_dict = json.load(f)
 #        txt3=f['lat']
   #      print (json_dict)
-        U=Userq.objects.get(pk=2)
-        U.example3=txt+":"+txt2
-        U.save()
+    #    U=Userq.objects.get(pk=2)
+    #    U.example3=txt+":"+txt2
+    #    U.save()
         return HttpResponse(response,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
 
     else:
