@@ -1,9 +1,5 @@
 {% extends "app_templates/base.html" %}
 {% block content %}
-<ul>
-
-  
-  </ul>
 <div id="map"></div>
 <form action="" method="POST">
     {{ form.non_field_errors }}
@@ -29,13 +25,76 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-success btn-lg" >送信</button>
 </form>
+{{ request.get_full_path }}
   {% load static %}
 
   <script src="{% static 'app/js/app1.js' %}"></script>
   <script src="{% static 'app/json/hoge.json' %}"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGDQUmUwxTKDYbrOXlzLasHgeBfuPkVoA&callback=initMap" async defer></script>
 
+<script>
+    function getClickLatLng(lat_lng, map) {
+      event.preventDefault();
+//alert(JSON.stringify(obj));
+      // 座標を表示
+      document.getElementById('lat').textContent = lat_lng.lat();
+      document.getElementById('lng').textContent = lat_lng.lng();
+      a="{% url 'app:user_update' user.pk %}";
+     
+      var obj={
+          lat:lat_lng.lat(),
+          lng:lat_lng.lng(),
+      };
+      alert(a);
+  
+      iti=lat_lng.lat()+","+lat_lng.lng();
+ //     alert(obj.lat);
+        $.ajax({
+            'url':'{% url "app:save_latlng" %}',
+            'type':'POST',
+            'data':{
+                'lat':lat_lng.lat(),
+                'lng':lat_lng.lng(),
+                'lng_w':'afeeg',
+                'lng_s':a,
+                
+            },
+            'dataType':'json',
+            
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+            'success':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+                //alert(response.aaa['lat']);  // レスポンスからデータを取り出してアラート
+                //alert(iti);
+            },
+          'error':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+                alert("st");  // レスポンスからデータを取り出してアラート
+                alert(response.your_surprise_txt)
+                alert(iti);
+            },
+        });
+       
+      var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map,
 
+      });
+}
+</script>
+<script>
+    function initMap() {
+
+      // マップの初期化
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: {lat: 33.232647, lng: 131.651055}
+      });
+
+      // クリックイベントを追加
+      map.addListener('click', function(e) {
+        getClickLatLng(e.latLng, map);
+      });
+    }
+</script>
 
 {% endblock %}
 

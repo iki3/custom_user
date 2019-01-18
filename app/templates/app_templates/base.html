@@ -52,6 +52,9 @@
           <li>
             <a class="nav-item nav-link" href="{% url 'app:map' %}">map</a>
           </li>
+          <li>
+            <a class="nav-item nav-link" href="{% url 'app:pin' %}">ピン差し</a>
+          </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-item nav-link" href="{% url 'app:login' %}">
@@ -71,45 +74,7 @@
     {% csrf_token %}
 </body>
 <script>
-    function getClickLatLng(lat_lng, map) {
-      event.preventDefault();
-//alert(JSON.stringify(obj));
-      // 座標を表示
-      document.getElementById('lat').textContent = lat_lng.lat();
-      document.getElementById('lng').textContent = lat_lng.lng();
-      var obj={
-          lat:lat_lng.lat(),
-          lng:lat_lng.lng(),
-      };
-      iti=lat_lng.lat()+","+lat_lng.lng();
- //     alert(obj.lat);
-        $.ajax({
-            'url':'{% url "app:save_latlng" %}',
-            'type':'POST',
-            'data':{
-                'lat':lat_lng.lat(),
-                'lng':lat_lng.lng(),
-            },
-            'dataType':'json',
-            
-          csrfmiddlewaretoken: '{{ csrf_token }}',
-            'success':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
-                alert(response.your_surprise_txt);  // レスポンスからデータを取り出してアラート
-                alert(iti);
-            },
-          'error':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
-                alert("st");  // レスポンスからデータを取り出してアラート
-                alert(response.your_surprise_txt)
-                alert(iti);
-            },
-        });
-       
-  var icon = new google.maps.MarkerImage('president_furukawa.jpg',
-    new google.maps.Size(200,200),
-    new google.maps.Point(0,0),
-    new google.maps.Point(19,51)
-  );
-}
+
 </script>
 
   {% load static %}

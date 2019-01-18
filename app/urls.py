@@ -32,5 +32,7 @@ urlpatterns = [
     path('map1/', views.map1, name='map1'),
     path('map2/', views.map2, name='map2'),
     path('save_latlng/', views.save_latlng, name='save_latlng'),
+    path('pin/', views.pin, name='pin'),
+    path('pin_data/',views.pin_data,  name='pin_data'),
     
 ]

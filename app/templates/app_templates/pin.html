@@ -1,0 +1,53 @@
+{% extends "app_templates/base.html" %}
+{% block content %}
+
+
+
+
+
+  {% load static %}
+
+
+  <script src="{% static 'app/js/app1.js' %}"></script>
+  <script src="{% static 'app/json/hoge.json' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGDQUmUwxTKDYbrOXlzLasHgeBfuPkVoA&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+
+      // マップの初期化
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: {lat: 33.232647, lng: 131.651055}
+      });
+
+      // クリックイベントを追加
+      map.addListener('click', function(e) {
+        getClickLatLng(e.latLng, map);
+      });
+      
+   //   alert("grsg");
+      $.ajax({
+            'url':'{% url "app:pin_data" %}',
+            'type':'POST',
+            'data':{
+                'lat':1,
+                'lng':2,
+            },
+            'dataType':'json',
+            
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+            'success':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+             //   alert(response.your_surprise_txt['lat']);  // レスポンスからデータを取り出してアラート
+                alert("iti");
+                alert(response.ccc[16]['lat']);
+                alert(response.ccc[18]['lat']);
+            },
+          'error':function(response){  // 通信が成功したら動く処理で、引数には返ってきたレスポンスが入る
+                alert("st");  // レスポンスからデータを取り出してアラート
+              //  alert(response.your_surprise_txt)
+            //    alert(iti);
+            },
+        });
+    }
+</script>
+{% endblock %}

@@ -53,6 +53,8 @@ if settings.AUTH_USER_MODEL == 'app.User':
         example1=models.CharField(_('example1'),max_length=150,blank=True)
         example2=models.CharField(_('example2'),max_length=150,blank=True)
         example3=models.CharField(_('example3'),max_length=150,blank=True)
+        lat=models.CharField(_('lat'),max_length=150,blank=True)
+        lng=models.CharField(_('lng'),max_length=150,blank=True)
 
         is_staff = models.BooleanField(
             _('staff status'),

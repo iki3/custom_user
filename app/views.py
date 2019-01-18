@@ -153,7 +153,48 @@ def map2(request):    # AJAXに答える関数
 
 
 def save_latlng(request):    # AJAXに答える関数
+    print ("haro")
 
+    if request.method == 'POST':
+        txt = request.POST['lat'] # POSTデータを取得して
+        txt2=request.POST['lng']
+        txt3=request.POST['lng_s']
+        print (request.get_full_path)
+        print (txt3)
+        txt3=txt3.strip("/")
+        txt3=txt3.strip("user_update/")
+
+        
+
+        my_dict = {
+           'lat':txt,
+           'lng':txt2,
+        }
+        my_dict2 = json.dumps({'aaa':my_dict})
+#        def test_func(self):
+#            user = self.request.user
+        #    return user.pk == self.kwargs['pk'] or user.is_superuser
+
+#        return resolve_url('app:user_detail', pk=self.kwargs['pk'])
+        U=Userq.objects.get(pk=txt3)
+        U.example3=txt+":"+txt2
+        U.lat=txt
+        U.lng=txt2
+        U.save()
+
+        
+
+        return HttpResponse(my_dict2,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
+
+    else:
+        print("こんばんわ")
+        raise Http404  # GETリクエストを404扱いにしているが、実際は別にしなくてもいいかも   
+
+def pin(request):
+    return render(request,'app_templates/pin.html')
+
+def pin_data(request,):
+    print ("hro")
 
     if request.method == 'POST':
         txt = request.POST['lat'] # POSTデータを取得して
@@ -161,36 +202,69 @@ def save_latlng(request):    # AJAXに答える関数
      #   print('book1の情報：{}'.format(txt['lat']))
      #  print('book1の情報：{}'.format(txt['lng']))
      #   surprise_txt = format(txt['lat'])+ "!!!"  # 加工
-    #   print (txt)
+        print ("txt")
      #   print (txt2)
      #   print(type(txt))
         surprise_txt = txt + "!!!" 
   #      moji=txt.rsplit('}')[0]
    #     moji = txt.split('{')[0]
-        my_dict2 = {
+        my_dict = {
            'lat':txt,
            'lng':txt2,
         }
-     #   print(moji)
-     #   response = txt # JSON形式に直して・・
+        my_dict2 = json.dumps({'aaa':my_dict})
         response = json.dumps({'your_surprise_txt':surprise_txt,})
+        numbers=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+        """
+
+        for number in numbers:
+            didict[number]={"lat":1,"lng":2,"num":number+10}
+            
+        dict2=json.dumps({'ccc':didict})  
+
+        while True:
+            i=i+1
+            try:
+                U=Userq.objects.get(pk=number)
+                if()
+                lat=U.lat
+                lng=U.lng
+                print(lat,lng)
+            except:
+                break
+
+        """        
+        didict={}
+        for number in numbers:
+            try:
+                U=Userq.objects.get(pk=number)
+                lat=U.lat
+                lng=U.lng
+                didict[number]={"lat":lat,"lng":lng,"num":number}
+                print(lat,lng)
+            except:
+                didict[number]={"lat":-1,"lng":-1,"num":number}
+                print(number)
         
-    #    f2 = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'w')
-    #    json.dump(my_dict2, f2)
-    #    f = open('/home/ec2-user/environment/english_test/app/static/app/json/hoge.json', 'r')
-   #     json_dict = json.load(f)
-#        txt3=f['lat']
-  #      print (json_dict)
-        U=Userq.objects.get(pk=2)
-        U.example3=txt+":"+txt2
-        U.save()
-        return HttpResponse(response,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
+        dict2=json.dumps({'ccc':didict})  
+
+        print("endgeiojgfeiojeoi")        
+        """
+        
+        U=Userq.objects.get(pk=1)            
+        lat=U.lat
+        lng=U.lng
+        print(lat,lng)       
+        """
+        
+        
+
+        
+        return HttpResponse(dict2,content_type='application/javascript')  # 返す。JSONはjavascript扱いなのか・・
 
     else:
         print("こんばんわ")
         raise Http404  # GETリクエストを404扱いにしているが、実際は別にしなくてもいいかも   
-
-
 
 
 
@@ -212,7 +286,7 @@ class UserCreate(generic.CreateView):
     def form_valid(self, form):
         
         """仮登録と本登録用メールの発行."""
-        # 仮登録と本登録の切り替えは、is_active属性を使うと簡単です。
+        # 仮登録と本登録の切り替えは、is_active属性を使うと簡単��す。
         # 退会処理も、is_activeをFalseにするだけにしておくと捗ります。
         user = form.save(commit=False)
         user.is_active = False
@@ -308,11 +382,12 @@ class UserDetail(OnlyYouMixin, generic.DetailView):
 
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
+    print("こんにちは")
     """ユーザー情報更新ページ"""
     model = Userq
     form_class = UserUpdateForm
     template_name = 'app_templates/user_form.html'  # デフォルトユーザーを使う場合に備え、きちんとtemplate名を書く
-
+    print("こんにfeeawefちは")
     def get_success_url(self):
         return resolve_url('app:user_detail', pk=self.kwargs['pk'])
 

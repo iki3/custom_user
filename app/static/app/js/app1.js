@@ -38,16 +38,6 @@ $(document).ajaxSend(function(event, xhr, settings) {
 });
 
 
-    function initMap() {
 
-      // マップの初期化
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: {lat: 33.232647, lng: 131.651055}
-      });
-
-      // クリックイベントを追加
-      map.addListener('click', function(e) {
-        getClickLatLng(e.latLng, map);
-      });
-    }
+    
+    
